@@ -1,0 +1,18 @@
+# Render Blueprint
+# 部署配置 - Render.com 免费实例
+
+services:
+  - type: web
+    name: ex-skill-api
+    env: python
+    region: singapore  # 亚太节点，延迟低
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    
+    # 环境变量
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
