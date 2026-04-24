@@ -1,0 +1,161 @@
+<view class="container">
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">‹</text>
+    </view>
+    <text class="nav-title">告诉TA你的心情</text>
+  </view>
+
+  <scroll-view class="page-content" scroll-y>
+    <!-- 副标题 -->
+    <view class="subtitle">
+      <text>选一个表情，让TA知道你在想什么</text>
+    </view>
+
+    <!-- 心情选择 -->
+    <view class="mood-section">
+      <view class="mood-label">此刻心情</view>
+      <scroll-view class="mood-scroll" scroll-x enable-flex>
+        <view class="mood-card {{selectedMood === '开心' ? 'active' : ''}}" bindtap="selectMood" data-mood="开心" data-color="#FFE066" data-emoji="😊">
+          <view class="emoji-circle" style="background: #FFE066;">
+            <text class="mood-emoji">😊</text>
+          </view>
+          <view class="mood-info">
+            <text class="mood-name">开心</text>
+          </view>
+        </view>
+        <view class="mood-card {{selectedMood === '幸福' ? 'active' : ''}}" bindtap="selectMood" data-mood="幸福" data-color="#FFB3D1" data-emoji="🥰">
+          <view class="emoji-circle" style="background: #FFB3D1;">
+            <text class="mood-emoji">🥰</text>
+          </view>
+          <view class="mood-info">
+            <text class="mood-name">幸福</text>
+          </view>
+        </view>
+        <view class="mood-card {{selectedMood === '平静' ? 'active' : ''}}" bindtap="selectMood" data-mood="平静" data-color="#B8E0D2" data-emoji="😌">
+          <view class="emoji-circle" style="background: #B8E0D2;">
+            <text class="mood-emoji">😌</text>
+          </view>
+          <view class="mood-info">
+            <text class="mood-name">平静</text>
+          </view>
+        </view>
+        <view class="mood-card {{selectedMood === '思考' ? 'active' : ''}}" bindtap="selectMood" data-mood="思考" data-color="#C9D6DF" data-emoji="🤔">
+          <view class="emoji-circle" style="background: #C9D6DF;">
+            <text class="mood-emoji">🤔</text>
+          </view>
+          <view class="mood-info">
+            <text class="mood-name">思考</text>
+          </view>
+        </view>
+        <view class="mood-card {{selectedMood === '烦躁' ? 'active' : ''}}" bindtap="selectMood" data-mood="烦躁" data-color="#FFD6A5" data-emoji="😤">
+          <view class="emoji-circle" style="background: #FFD6A5;">
+            <text class="mood-emoji">😤</text>
+          </view>
+          <view class="mood-info">
+            <text class="mood-name">烦躁</text>
+          </view>
+        </view>
+        <view class="mood-card {{selectedMood === '难过' ? 'active' : ''}}" bindtap="selectMood" data-mood="难过" data-color="#A8D8EA" data-emoji="😢">
+          <view class="emoji-circle" style="background: #A8D8EA;">
+            <text class="mood-emoji">😢</text>
+          </view>
+          <view class="mood-info">
+            <text class="mood-name">难过</text>
+          </view>
+        </view>
+        <view class="mood-card {{selectedMood === '疲惫' ? 'active' : ''}}" bindtap="selectMood" data-mood="疲惫" data-color="#D4C5E2" data-emoji="😴">
+          <view class="emoji-circle" style="background: #D4C5E2;">
+            <text class="mood-emoji">😴</text>
+          </view>
+          <view class="mood-info">
+            <text class="mood-name">疲惫</text>
+          </view>
+        </view>
+        <view class="mood-card {{selectedMood === '兴奋' ? 'active' : ''}}" bindtap="selectMood" data-mood="兴奋" data-color="#FFD93D" data-emoji="🤩">
+          <view class="emoji-circle" style="background: #FFD93D;">
+            <text class="mood-emoji">🤩</text>
+          </view>
+          <view class="mood-info">
+            <text class="mood-name">兴奋</text>
+          </view>
+        </view>
+        <view class="mood-card {{selectedMood === '焦虑' ? 'active' : ''}}" bindtap="selectMood" data-mood="焦虑" data-color="#FFEAA7" data-emoji="😰">
+          <view class="emoji-circle" style="background: #FFEAA7;">
+            <text class="mood-emoji">😰</text>
+          </view>
+          <view class="mood-info">
+            <text class="mood-name">焦虑</text>
+          </view>
+        </view>
+        <view class="mood-card {{selectedMood === '推荐' ? 'active' : ''}}" bindtap="selectMood" data-mood="推荐" data-color="#FFAAA5" data-emoji="🙋">
+          <view class="emoji-circle" style="background: #FFAAA5;">
+            <text class="mood-emoji">🙋</text>
+          </view>
+          <view class="mood-info">
+            <text class="mood-name">推荐</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 备注输入 -->
+    <view class="note-section">
+      <view class="note-label">想对TA说</view>
+      <textarea class="note-input" placeholder="今天见到你很开心～" value="{{noteText}}" bindinput="onNoteInput" auto-height/>
+    </view>
+
+    <!-- 发送按钮 -->
+    <view class="send-btn" bindtap="sendMood">
+      <text class="send-text">发送给TA</text>
+    </view>
+
+    <!-- 我的心情卡片 -->
+    <view class="my-mood-card" wx:if="{{showMyMood}}">
+      <view class="my-mood-header">
+        <view class="my-avatar">我</view>
+        <view class="my-mood-info">
+          <text class="my-mood-title">我的心情</text>
+          <text class="my-mood-time">{{myMoodTime}}</text>
+        </view>
+      </view>
+      <view class="my-mood-body">
+        <text class="my-mood-emoji">{{myMoodEmoji}}</text>
+        <text class="my-mood-text">{{myMoodText}}</text>
+      </view>
+    </view>
+
+    <!-- TA的动态 -->
+    <view class="feed-section">
+      <view class="feed-header">
+        <view class="feed-title">TA的动态</view>
+        <view class="feed-tabs">
+          <text class="feed-tab {{feedTab === 'all' ? 'active' : ''}}" bindtap="switchFeedTab" data-tab="all">所有</text>
+          <text class="feed-tab {{feedTab === 'recent' ? 'active' : ''}}" bindtap="switchFeedTab" data-tab="recent">刚刚</text>
+        </view>
+      </view>
+
+      <view class="message-list">
+        <view class="message-item" wx:for="{{messages}}" wx:key="id" wx:if="{{feedTab === 'all' || item.recent}}">
+          <view class="message-avatar" style="background: {{item.avatarColor}};">
+            <text>{{item.avatarText}}</text>
+          </view>
+          <view class="message-content">
+            <view class="message-bubble" style="--accent-color: {{item.color}};">
+              <text class="message-text">{{item.text}}</text>
+              <view class="message-meta">
+                <text class="message-mood-tag" style="background: {{item.tagBg}}; color: {{item.tagColor}};">{{item.emoji}} {{item.mood}}</text>
+                <text class="message-time">{{item.time}}</text>
+              </view>
+            </view>
+            <view class="message-reply-btn" bindtap="quickReply" data-text="{{item.quickReply}}">回复</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部占位 -->
+    <view class="bottom-placeholder"></view>
+  </scroll-view>
+</view>

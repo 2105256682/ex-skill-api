@@ -1,0 +1,156 @@
+<view class="container">
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">‹</text>
+    </view>
+    <text class="nav-title">许愿与反馈</text>
+  </view>
+
+  <scroll-view class="page-content" scroll-y>
+    <!-- 模式切换 -->
+    <view class="mode-switch-wrap">
+      <view class="mode-switch">
+        <view class="mode-indicator {{currentMode === 'feedback' ? 'right' : ''}}"></view>
+        <view class="mode-btn {{currentMode === 'wish' ? 'active' : ''}}" bindtap="switchMode" data-mode="wish">✨ 许愿池</view>
+        <view class="mode-btn {{currentMode === 'feedback' ? 'active' : ''}}" bindtap="switchMode" data-mode="feedback">💬 提反馈</view>
+      </view>
+    </view>
+
+    <!-- 许愿模式 -->
+    <view class="panel {{currentMode === 'wish' ? 'show' : ''}}" id="wishPanel">
+      <view class="panel-header">
+        <text class="panel-title">写下你的心愿</text>
+        <text class="panel-sub">每一个愿望都会被认真对待</text>
+      </view>
+
+      <!-- 许愿输入 -->
+      <view class="input-wrap">
+        <textarea 
+          class="wish-input" 
+          placeholder="在这里写下你的愿望...\n比如：希望增加更多角色、想要语音功能、期待新的互动方式..."
+          maxlength="200"
+          bindinput="updateCharCount"
+          value="{{wishText}}"
+        ></textarea>
+        <text class="char-count {{wishText.length > 200 ? 'warn' : ''}}">{{wishText.length}} / 200</text>
+      </view>
+
+      <!-- 标签选择 -->
+      <view class="tags-section">
+        <text class="tags-label">选择标签</text>
+        <view class="tags-wrap">
+          <view class="tag-btn {{selectedTags.indexOf('新功能') !== -1 ? 'selected' : ''}}" bindtap="toggleTag" data-tag="新功能">新功能</view>
+          <view class="tag-btn {{selectedTags.indexOf('角色相关') !== -1 ? 'selected' : ''}}" bindtap="toggleTag" data-tag="角色相关">角色相关</view>
+          <view class="tag-btn {{selectedTags.indexOf('界面优化') !== -1 ? 'selected' : ''}}" bindtap="toggleTag" data-tag="界面优化">界面优化</view>
+          <view class="tag-btn {{selectedTags.indexOf('互动方式') !== -1 ? 'selected' : ''}}" bindtap="toggleTag" data-tag="互动方式">互动方式</view>
+          <view class="tag-btn {{selectedTags.indexOf('其他') !== -1 ? 'selected' : ''}}" bindtap="toggleTag" data-tag="其他">其他</view>
+        </view>
+      </view>
+
+      <!-- 提交 -->
+      <view class="submit-btn" bindtap="submitWish">投递愿望</view>
+
+      <!-- 历史记录 -->
+      <view class="history-section">
+        <view class="history-header">
+          <text class="history-title">我的愿望</text>
+          <text class="history-count">{{wishList.length}} 个愿望</text>
+        </view>
+        <view class="history-list">
+          <view class="history-card" wx:for="{{wishList}}" wx:key="id">
+            <view class="history-status">
+              <view class="status-dot {{item.status === 'done' ? 'done' : 'pending'}}"></view>
+            </view>
+            <view class="history-content">
+              <text class="history-text">{{item.text}}</text>
+              <view class="history-meta">
+                <text class="history-tag">{{item.tag}}</text>
+                <text class="history-date">{{item.date}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 反馈模式 -->
+    <view class="panel {{currentMode === 'feedback' ? 'show' : ''}}" id="feedbackPanel">
+      <view class="panel-header">
+        <text class="panel-title">帮助我们改进</text>
+        <text class="panel-sub">你的反馈让产品变得更好</text>
+      </view>
+
+      <!-- 反馈类型 -->
+      <view class="feedback-types">
+        <view class="feedback-type {{feedbackType === 'bug' ? 'selected' : ''}}" bindtap="selectFeedbackType" data-type="bug">
+          <view class="type-icon">
+            <text class="type-icon-text">⚠</text>
+          </view>
+          <view class="type-info">
+            <text class="type-name">问题反馈</text>
+            <text class="type-desc">遇到 Bug 或功能异常</text>
+          </view>
+        </view>
+        <view class="feedback-type {{feedbackType === 'suggest' ? 'selected' : ''}}" bindtap="selectFeedbackType" data-type="suggest">
+          <view class="type-icon">
+            <text class="type-icon-text">💡</text>
+          </view>
+          <view class="type-info">
+            <text class="type-name">产品建议</text>
+            <text class="type-desc">对新功能的期待和想法</text>
+          </view>
+        </view>
+        <view class="feedback-type {{feedbackType === 'experience' ? 'selected' : ''}}" bindtap="selectFeedbackType" data-type="experience">
+          <view class="type-icon">
+            <text class="type-icon-text">😊</text>
+          </view>
+          <view class="type-info">
+            <text class="type-name">使用体验</text>
+            <text class="type-desc">整体感受和改进建议</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 星级评分 -->
+      <view class="rating-section">
+        <text class="rating-label">整体评分</text>
+        <view class="stars-wrap">
+          <text class="star-btn {{starRating >= 1 ? 'active' : ''}}" bindtap="setStar" data-n="1">★</text>
+          <text class="star-btn {{starRating >= 2 ? 'active' : ''}}" bindtap="setStar" data-n="2">★</text>
+          <text class="star-btn {{starRating >= 3 ? 'active' : ''}}" bindtap="setStar" data-n="3">★</text>
+          <text class="star-btn {{starRating >= 4 ? 'active' : ''}}" bindtap="setStar" data-n="4">★</text>
+          <text class="star-btn {{starRating >= 5 ? 'active' : ''}}" bindtap="setStar" data-n="5">★</text>
+        </view>
+        <text class="rating-text">{{ratingText}}</text>
+      </view>
+
+      <!-- 反馈输入 -->
+      <view class="input-wrap">
+        <textarea 
+          class="wish-input" 
+          placeholder="详细描述你遇到的问题或建议..."
+          maxlength="500"
+          bindinput="updateFeedbackCharCount"
+          value="{{feedbackText}}"
+        ></textarea>
+        <text class="char-count {{feedbackText.length > 500 ? 'warn' : ''}}">{{feedbackText.length}} / 500</text>
+      </view>
+
+      <!-- 提交 -->
+      <view class="submit-btn" bindtap="submitFeedback">提交反馈</view>
+    </view>
+  </scroll-view>
+
+  <!-- 成功弹窗 -->
+  <view class="success-modal {{showSuccess ? 'show' : ''}}">
+    <view class="success-content">
+      <view class="success-icon">
+        <text class="success-check">✓</text>
+      </view>
+      <text class="success-title">{{successTitle}}</text>
+      <text class="success-desc">{{successDesc}}</text>
+      <view class="success-btn" bindtap="closeSuccessModal">知道了</view>
+    </view>
+  </view>
+</view>

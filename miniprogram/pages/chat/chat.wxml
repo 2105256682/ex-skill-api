@@ -1,0 +1,113 @@
+<view class="chat-wrap">
+  <!-- 顶部导航栏 -->
+  <view class="header">
+    <view class="back-btn" bindtap="onBack">
+      <text class="back-arrow">‹</text>
+    </view>
+    <view class="user-info">
+      <view class="avatar-wrapper">
+        <view class="avatar-icon">{{aiEmoji}}</view>
+        <view class="online-indicator"></view>
+      </view>
+      <view class="user-details">
+        <text class="user-name">{{aiName}}</text>
+        <text class="user-status">{{statusText}}</text>
+      </view>
+    </view>
+    <view class="menu-btn">
+      <text class="menu-line"></text>
+      <text class="menu-line"></text>
+      <text class="menu-line"></text>
+    </view>
+  </view>
+
+  <!-- 聊天区域 -->
+  <scroll-view
+    class="chat-area"
+    scroll-y
+    scroll-into-view="{{scrollToId}}"
+    scroll-with-animation
+    enhanced="{{true}}"
+    show-scrollbar="{{false}}"
+    bindscrolltoupper="onScrollUp"
+  >
+    <view class="time-tag">今天</view>
+
+    <block wx:for="{{messages}}" wx:key="id">
+      <!-- AI 消息 -->
+      <block wx:if="{{item.role === 'ai' && item.type !== 'skillCard'}}">
+        <view class="message received" animation="{{item.animate ? 'messageAppear' : ''}}">
+          <view class="bubble-received">
+            <text class="msg-text" selectable>{{item.displayContent}}</text>
+          </view>
+        </view>
+        <view class="msg-time">{{item.read ? '' : ''}}</view>
+      </block>
+
+      <!-- 用户消息 -->
+      <block wx:if="{{item.role === 'user'}}">
+        <view class="message sent">
+          <view class="bubble-sent">
+            <text class="msg-text">{{item.content}}</text>
+            <view class="message-status">
+              <text class="time">{{item.time}}</text>
+              <text class="read-icon" wx:if="{{item.read}}">✓✓</text>
+            </view>
+          </view>
+        </view>
+      </block>
+
+      <!-- 技能卡片 -->
+      <block wx:if="{{item.role === 'ai' && item.type === 'skillCard'}}">
+        <view class="message received">
+          <view class="bubble-received">
+            <view class="skill-card">
+              <view wx:if="{{item.skillCardData.title.includes('天气')}}" class="weather-card">
+                <view class="weather-header">
+                  <text class="weather-icon">{{item.skillCardData.data.icon}}</text>
+                  <view class="weather-info">
+                    <text class="weather-temp">{{item.skillCardData.data.temp}}</text>
+                    <text class="weather-text">{{item.skillCardData.data.text}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </block>
+
+    <!-- 打字指示器 -->
+    <view wx:if="{{isTyping}}" class="typing-indicator">
+      <view class="typing-dot"></view>
+      <view class="typing-dot"></view>
+      <view class="typing-dot"></view>
+    </view>
+
+    <!-- 底部锚点 -->
+    <view id="msg-bottom" style="height: 20rpx;"></view>
+  </scroll-view>
+
+  <!-- 输入区域 -->
+  <view class="input-area">
+    <view class="input-wrapper">
+      <view class="attach-btn" bindtap="toggleEmoji">
+        <text class="attach-icon">☺</text>
+      </view>
+      <input
+        class="message-input"
+        type="text"
+        placeholder="写消息..."
+        placeholder-style="color:#8e8e93"
+        value="{{inputText}}"
+        bindinput="onInput"
+        bindconfirm="onSend"
+        confirm-type="send"
+        adjust-position="{{true}}"
+      />
+      <view class="send-btn {{inputText ? 'active' : ''}}" bindtap="onSend">
+        <text class="send-icon">›</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,98 @@
+<view class="container">
+  <!-- 状态栏 -->
+  <view class="status-bar">
+    <text class="time">9:41</text>
+    <view class="status-icons">
+      <text class="status-icon">◎</text>
+      <text class="status-icon">☰</text>
+    </view>
+  </view>
+
+  <!-- 顶部导航 -->
+  <view class="header">
+    <view class="header-btn" bindtap="goBack">
+      <text class="header-icon">‹</text>
+    </view>
+    <text class="header-title">编辑人设</text>
+    <view class="header-btn" bindtap="closePage">
+      <text class="header-icon">✕</text>
+    </view>
+  </view>
+
+  <scroll-view class="page-content" scroll-y>
+    <!-- 头像上传 -->
+    <view class="avatar-section" bindtap="chooseAvatar">
+      <view class="avatar-wrapper">
+        <image class="avatar-img" src="{{avatarUrl}}" mode="aspectFill" wx:if="{{avatarUrl}}" />
+        <view class="avatar-placeholder" wx:else>
+          <text>👤</text>
+        </view>
+        <view class="avatar-overlay">
+          <text class="camera-icon">📷</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 姓名和性别 -->
+    <view class="basic-info">
+      <view class="input-group" style="flex: 1.5;">
+        <text class="input-icon">👤</text>
+        <input type="text" placeholder="请输入姓名" value="{{name}}" bindinput="onNameInput" />
+      </view>
+      <view class="gender-select" bindtap="showGenderPicker">
+        <text class="gender-text">{{genderText || '性别'}}</text>
+        <text class="arrow">▼</text>
+      </view>
+    </view>
+
+    <!-- 角色性格标签 -->
+    <view class="section">
+      <text class="section-title">角色性格</text>
+      <view class="tag-input-wrapper">
+        <view class="tags-container">
+          <view class="tag" wx:for="{{personalityTags}}" wx:key="index">
+            <text>{{item}}</text>
+            <text class="remove" bindtap="removeTag" data-index="{{index}}">×</text>
+          </view>
+        </view>
+        <input class="tag-input" type="text" placeholder="输入性格标签，按回车添加" value="{{tagInput}}" bindinput="onTagInput" bindconfirm="addTag" />
+      </view>
+    </view>
+
+    <!-- 分割线 -->
+    <view class="divider">
+      <text class="divider-text">我的角色</text>
+    </view>
+
+    <!-- 说话风格 -->
+    <view class="big-section">
+      <view class="textarea-wrapper {{styleFocused ? 'active' : ''}}">
+        <view class="big-label {{styleFocused ? 'active' : ''}}">说话风格</view>
+        <textarea class="text-area" placeholder="描述这个角色的说话方式、口头禅、语气特点..." value="{{speakingStyle}}" bindinput="onStyleInput" bindfocus="onStyleFocus" bindblur="onStyleBlur" adjust-position="{{false}}"></textarea>
+        <view class="char-count">{{styleLength}} 字</view>
+      </view>
+    </view>
+
+    <!-- 背景人设 -->
+    <view class="big-section">
+      <view class="textarea-wrapper {{bgFocused ? 'active' : ''}}">
+        <view class="big-label {{bgFocused ? 'active' : ''}}">背景人设</view>
+        <textarea class="text-area" placeholder="描述这个角色的身世背景、成长经历、职业身份..." value="{{background}}" bindinput="onBgInput" bindfocus="onBgFocus" bindblur="onBgBlur" adjust-position="{{false}}"></textarea>
+        <view class="char-count">{{bgLength}} 字</view>
+      </view>
+    </view>
+
+    <!-- 习惯用语 -->
+    <view class="big-section">
+      <view class="textarea-wrapper {{habitFocused ? 'active' : ''}}">
+        <view class="big-label {{habitFocused ? 'active' : ''}}">习惯用语</view>
+        <textarea class="text-area" placeholder="记录这个角色常用的口头禅、特定措辞、打招呼方式..." value="{{habitPhrases}}" bindinput="onHabitInput" bindfocus="onHabitFocus" bindblur="onHabitBlur" adjust-position="{{false}}"></textarea>
+        <view class="char-count">{{habitLength}} 字</view>
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <button class="submit-btn" bindtap="submitForm">创建角色</button>
+    <text class="hint">所有文本框均不限制字数，尽情发挥你的创意</text>
+  </scroll-view>
+</view>

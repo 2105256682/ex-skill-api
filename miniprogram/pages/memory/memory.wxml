@@ -1,0 +1,155 @@
+<view class="container">
+  <!-- 顶部导航 -->
+  <view class="nav-header">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">‹</text>
+    </view>
+    <view class="nav-center">
+      <text class="nav-title">记忆卡片</text>
+      <text class="nav-subtitle">与 Veixll 的深刻瞬间</text>
+    </view>
+    <view class="more-btn">
+      <text class="more-icon">⋮</text>
+    </view>
+  </view>
+
+  <!-- 页码指示器 -->
+  <view class="page-indicator">
+    <view class="dots-row">
+      <view wx:for="{{memories}}" wx:key="id" class="dot {{currentIndex === index ? 'active' : ''}}"></view>
+    </view>
+    <text class="page-text">{{currentIndex + 1}} / {{memories.length}}</text>
+  </view>
+
+  <!-- 卡片区域 -->
+  <view class="card-container">
+    <view class="card-stack">
+      <view class="card {{isFlipped ? 'flipped' : ''}}" bindtap="flipCard">
+        <!-- 正面 -->
+        <view class="card-front">
+          <view class="deco-circle circle-1"></view>
+          <view class="deco-circle circle-2"></view>
+          <view class="deco-glow"></view>
+          
+          <view class="card-content">
+            <view class="card-tags">
+              <text class="date-tag">{{currentMemory.date}}</text>
+              <text class="tag-badge">{{currentMemory.tag}}</text>
+            </view>
+            
+            <view class="card-title">
+              <text>{{currentMemory.title}}</text>
+            </view>
+            
+            <view class="card-body">
+              <text class="card-text">{{currentMemory.content}}</text>
+            </view>
+            
+            <view class="card-footer">
+              <view class="avatar-small">
+                <text class="avatar-letter">V</text>
+              </view>
+              <text class="role-label">角色：Veixll</text>
+              <view class="flip-hint">
+                <text class="hint-icon">↻</text>
+                <text class="hint-text">点击翻转</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 背面 -->
+        <view class="card-back">
+          <view class="back-header">
+            <view class="back-title-wrap">
+              <text class="back-title">我的留言</text>
+              <text class="back-subtitle">Veixll 也会看到并回复哦</text>
+            </view>
+            <view class="close-btn" bindtap="flipCard">
+              <text>✕</text>
+            </view>
+          </view>
+          
+          <view class="tab-row">
+            <view class="tab-btn {{currentTab === 'recent' ? 'active' : ''}}" bindtap="switchTab" data-tab="recent">近期</view>
+            <view class="tab-btn {{currentTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">全部</view>
+          </view>
+          
+          <scroll-view class="message-list" scroll-y>
+            <view wx:if="{{currentMessages.length === 0}}" class="empty-msg">
+              <text class="empty-icon">💬</text>
+              <text class="empty-text">还没有留言</text>
+              <text class="empty-sub">在下方输入或点击表情发表感受</text>
+            </view>
+            
+            <view wx:for="{{currentMessages}}" wx:key="id" class="msg-item">
+              <view class="user-msg-wrap">
+                <view class="user-msg">
+                  <text class="msg-text">{{item.text}}</text>
+                  <view class="msg-meta">
+                    <text class="msg-date">{{item.date}}</text>
+                    <text class="delete-btn" bindtap="deleteMsg" data-id="{{item.id}}">🗑</text>
+                  </view>
+                </view>
+              </view>
+              <view wx:if="{{item.reply}}" class="reply-wrap">
+                <view class="avatar-tiny">
+                  <text class="avatar-letter-sm">V</text>
+                </view>
+                <view class="veixll-reply">
+                  <text class="reply-text">{{item.reply.text}}</text>
+                  <text class="reply-date">{{item.reply.date}}</text>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+          
+          <view class="input-area">
+            <input class="msg-input" type="text" placeholder="对 Veixll 说点什么..." value="{{inputText}}" bindinput="onInput" bindconfirm="addMessage" />
+            <view class="send-btn" bindtap="addMessage">
+              <text class="send-icon">↑</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 翻页控制 -->
+  <view class="nav-controls">
+    <view class="nav-btn prev-btn" bindtap="prevCard">
+      <text class="nav-icon">‹</text>
+      <text class="nav-label">上一页</text>
+    </view>
+    <view class="flip-center-btn" bindtap="flipCard">
+      <text class="flip-icon">⇄</text>
+    </view>
+    <view class="nav-btn next-btn" bindtap="nextCard">
+      <text class="nav-label">下一页</text>
+      <text class="nav-icon">›</text>
+    </view>
+  </view>
+
+  <!-- 表情互动区 -->
+  <view class="emoji-section">
+    <text class="emoji-label">这个瞬间给你的感觉</text>
+    <view class="emoji-row">
+      <view wx:for="{{emojis}}" wx:key="index" class="emoji-btn {{selectedEmoji === item ? 'selected' : ''}}" bindtap="selectEmoji" data-emoji="{{item}}">
+        <text class="emoji-char">{{item}}</text>
+      </view>
+    </view>
+    <text class="emoji-hint {{selectedEmoji ? 'active' : ''}}">{{selectedEmoji ? '你的感受' : '选择一个表情来表达你的感受'}}</text>
+  </view>
+</view>
+
+<!-- 表情留言弹窗 -->
+<view class="emoji-modal {{showModal ? 'show' : ''}}" bindtap="closeModal">
+  <view class="modal-content" catchtap="stopProp">
+    <view class="modal-close" bindtap="closeModal">✕</view>
+    <view class="modal-emoji">{{selectedEmoji}}</view>
+    <text class="modal-title">发表你的感受</text>
+    <text class="modal-sub">这个瞬间让你有什么想说的？</text>
+    <textarea class="modal-input" placeholder="写下你对这个瞬间的感受，Veixll 会看到的..." value="{{modalText}}" bindinput="onModalInput"></textarea>
+    <view class="modal-send-btn" bindtap="submitMessage">发送给 Veixll</view>
+  </view>
+</view>

@@ -1,0 +1,35 @@
+/* iconfont - Lucide Icons */
+@font-face {
+  font-family: "iconfont";
+  src: url('https://at.alicdn.com/t/font_xxxxx.ttf') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 44rpx;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Lucide icons - using unicode */
+.icon-home:before { content: "\1F3E0"; }
+.icon-globe:before { content: "\1F30D"; }
+.icon-msg:before { content: "\1F4AC"; }
+.icon-user:before { content: "\1F464"; }
+
+/* 选中状态图标变黑 */
+.nav-item.active .icon-home,
+.nav-item.active .icon-globe,
+.nav-item.active .icon-msg,
+.nav-item.active .icon-user {
+  color: #000;
+}
+
+/* 非选中状态图标灰色 */
+.icon-home,
+.icon-globe,
+.icon-msg,
+.icon-user {
+  color: #999;
+}

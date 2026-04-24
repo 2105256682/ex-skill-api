@@ -1,0 +1,102 @@
+<view class="container">
+  <!-- 顶部导航 -->
+  <view class="top-bar">
+    <view class="back-btn" bindtap="onBack">
+      <text class="back-arrow">‹</text>
+    </view>
+    <text class="top-title">{{isComplete ? '创建完成' : '创建中'}}</text>
+    <view class="placeholder"></view>
+  </view>
+
+  <!-- 分析进度中 -->
+  <view wx:if="{{!isComplete}}" class="analyze-section">
+    <view class="persona-name">{{personaName}}</view>
+    
+    <!-- 头像动画 -->
+    <view class="avatar-section">
+      <view class="avatar-circle active">
+        <text class="avatar-emoji">📋</text>
+      </view>
+      <view class="connecting-line active"></view>
+      <view class="avatar-circle active">
+        <text class="avatar-emoji">🗣️</text>
+      </view>
+      <view class="connecting-line active"></view>
+      <view class="avatar-circle active">
+        <text class="avatar-emoji">🧠</text>
+      </view>
+      <view class="connecting-line active"></view>
+      <view class="avatar-circle active">
+        <text class="avatar-emoji">✨</text>
+      </view>
+    </view>
+
+    <!-- 当前步骤 -->
+    <view class="current-step">
+      <text class="step-icon">💭</text>
+      <text class="step-desc">{{currentStep}}</text>
+    </view>
+
+    <!-- 进度条 -->
+    <view class="progress-wrap">
+      <view class="progress-bg">
+        <view class="progress-fill" style="width: {{progress}}%"></view>
+      </view>
+      <text class="progress-text">{{progress}}%</text>
+    </view>
+
+    <view class="tip-text">正在学习聊天风格，请稍候...</view>
+  </view>
+
+  <!-- 分析完成 -->
+  <view wx:if="{{isComplete}}" class="result-section">
+    <view class="success-icon">🎉</view>
+    <view class="success-title">{{personaName}} 创建成功！</view>
+    
+    <!-- 人格预览卡片 -->
+    <view class="persona-card">
+      <view class="card-header">
+        <text class="card-emoji">{{analysisResult.emoji}}</text>
+        <view class="card-info">
+          <text class="card-name">{{analysisResult.name}}</text>
+          <text class="card-style">{{analysisResult.basicInfo.personality}}</text>
+        </view>
+      </view>
+      
+      <!-- 性格标签 -->
+      <view class="card-tags" wx:if="{{analysisResult.basicInfo.traits.length > 0}}">
+        <text class="tag" wx:for="{{analysisResult.basicInfo.traits}}" wx:key="index">{{item}}</text>
+      </view>
+
+      <!-- 说话特点 -->
+      <view class="card-features">
+        <text class="feature-title">💬 说话特点</text>
+        <text class="feature-item">{{analysisResult.basicInfo.speakingStyle}}</text>
+      </view>
+
+      <!-- 回复风格 -->
+      <view class="card-features" wx:if="{{analysisResult.basicInfo.replyLength}}">
+        <text class="feature-title">📝 回复风格</text>
+        <text class="feature-item">{{analysisResult.basicInfo.replyLength}}</text>
+      </view>
+
+      <!-- 情绪特点 -->
+      <view class="card-features" wx:if="{{analysisResult.basicInfo.emotionalPattern}}">
+        <text class="feature-title">💕 情绪特点</text>
+        <text class="feature-item">{{analysisResult.basicInfo.emotionalPattern}}</text>
+      </view>
+
+      <!-- 口头禅 -->
+      <view class="card-features" wx:if="{{analysisResult.basicInfo.interjections.length > 0}}">
+        <text class="feature-title">🗣️ 口头禅</text>
+        <text class="feature-item">{{analysisResult.basicInfo.interjections.join('、')}}</text>
+      </view>
+    </view>
+
+    <!-- 开始聊天按钮 -->
+    <view class="start-btn" bindtap="onStartChat">
+      <text class="btn-text">开始和 {{analysisResult.name}} 聊天</text>
+      <text class="btn-arrow">›</text>
+    </view>
+  </view>
+</view>

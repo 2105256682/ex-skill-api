@@ -1,0 +1,42 @@
+<view class="container">
+  <!-- 欢迎语 -->
+  <view class="welcome">
+    <text class="welcome-cn">欢迎回来</text>
+    <text class="welcome-en">Welcome back</text>
+  </view>
+
+  <!-- 微信一键登录 -->
+  <view class="wx-login-section">
+    <button 
+      class="wx-login-btn {{loading ? 'loading' : ''}}"
+      bindtap="onWxLogin"
+      disabled="{{loading}}"
+      hover-class="none"
+    >
+      <text class="wx-icon">微</text>
+      <text class="wx-login-text">{{loading ? '登录中...' : '微信一键登录'}}</text>
+    </button>
+    
+    <text class="login-hint">登录后即可同步你的人格和聊天记录</text>
+  </view>
+
+  <!-- 分隔线 -->
+  <view class="divider">
+    <view class="divider-line"></view>
+    <text class="divider-text">或者</text>
+    <view class="divider-line"></view>
+  </view>
+
+  <!-- 游客模式 -->
+  <view class="skip-btn" bindtap="onSkip">
+    <text class="skip-text">游客模式先看看</text>
+  </view>
+
+  <!-- 注册提示 -->
+  <view class="register-tip">
+    <text class="tip-text">登录即表示同意</text>
+    <text class="tip-link">《用户协议》</text>
+    <text class="tip-text">和</text>
+    <text class="tip-link">《隐私政策》</text>
+  </view>
+</view>

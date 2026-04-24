@@ -1,0 +1,41 @@
+<view class="container">
+  <!-- 第一页 -->
+  <view class="page1 {{page1Leaving ? 'leaving' : ''}}">
+    <text class="title {{titleActive ? 'active' : ''}}">hello - virtual AI</text>
+  </view>
+
+  <!-- 第二页 -->
+  <view class="page2 {{page2Entering ? 'entering' : ''}} {{page2Leaving ? 'leaving' : ''}}">
+    <view class="bg-v {{bgVShow ? 'show' : ''}}">V</view>
+    <view class="exill-wrap">
+      <text class="char {{charAnimating ? 'animating' : ''}}" style="animation-delay: 0.05s;">.</text>
+      <text class="char {{charAnimating ? 'animating' : ''}}" style="animation-delay: 0.15s;">e</text>
+      <text class="char {{charAnimating ? 'animating' : ''}}" style="animation-delay: 0.25s;">x</text>
+      <text class="char {{charAnimating ? 'animating' : ''}}" style="animation-delay: 0.35s;">i</text>
+      <text class="char {{charAnimating ? 'animating' : ''}}" style="animation-delay: 0.45s;">l</text>
+      <text class="char {{charAnimating ? 'animating' : ''}}" style="animation-delay: 0.55s;">l</text>
+    </view>
+    <text class="footer-text {{footerActive ? 'active' : ''}}">倾心向往，为之着迷</text>
+  </view>
+
+  <!-- 第三页 -->
+  <view class="page3 {{page3Entering ? 'entering' : ''}}">
+    <!-- 彩色光晕装饰球 -->
+    <view class="orb-main {{page3Entering ? 'show' : ''}}"></view>
+    <view class="dot dot-pink-sm"></view>
+    <view class="dot dot-mint"></view>
+    <view class="dot dot-peach"></view>
+    <view class="dot dot-hotpink"></view>
+
+    <!-- 底部内容区 -->
+    <view class="p3-bottom {{page3Entering ? 'show' : ''}}">
+      <text class="p3-title">Login</text>
+      <view class="p3-btn-wrap" bindtap="onStart">
+        <view class="p3-btn">
+          <text class="p3-btn-arrow">→</text>
+        </view>
+      </view>
+      <text class="p3-lets">倾心向往，为之着迷</text>
+    </view>
+  </view>
+</view>

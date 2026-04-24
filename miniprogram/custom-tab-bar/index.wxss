@@ -1,0 +1,154 @@
+/* ========== 底部导航栏 ========== */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 110rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* 左侧组 */
+.tab-left-group {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 20rpx;
+}
+
+/* 右侧组 */
+.tab-right-group {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-left: 20rpx;
+}
+
+/* 顶部细线 */
+.tab-bar-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1rpx;
+  background: #ebebeb;
+}
+
+/* ========== Tab 项 ========== */
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6rpx;
+  padding-bottom: 14rpx;
+  padding-top: 36rpx;
+  transition: transform 0.15s cubic-bezier(0.32,0.72,0,1);
+}
+
+/* 点击缩放效果 */
+.tab-item:active {
+  transform: scale(0.85);
+}
+
+.icon-wrap {
+  width: 48rpx;
+  height: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg-icon {
+  width: 44rpx;
+  height: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.tab-img {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.tab-label {
+  font-size: 20rpx;
+  color: #aaa;
+  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.tab-item.active .tab-label {
+  color: #111;
+  font-weight: 500;
+}
+
+/* ========== 中间 + 按钮 ========== */
+.add-btn-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120rpx;
+  flex-shrink: 0;
+  position: relative;
+  bottom: 50rpx;
+  transition: transform 0.15s cubic-bezier(0.32,0.72,0,1);
+}
+
+.add-btn-wrap:active {
+  transform: scale(0.88);
+}
+
+.add-btn {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: #111;
+  border: 4rpx solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.25);
+}
+
+.plus-h {
+  width: 36rpx;
+  height: 3rpx;
+  background: #fff;
+  border-radius: 2rpx;
+  position: absolute;
+}
+
+.plus-v {
+  width: 3rpx;
+  height: 36rpx;
+  background: #fff;
+  border-radius: 2rpx;
+  position: absolute;
+}
+
+/* ========== 消息红点 ========== */
+.msg-dot {
+  width: 14rpx;
+  height: 14rpx;
+  background: #ff3b30;
+  border-radius: 50%;
+  position: absolute;
+  top: 0rpx;
+  right: 0rpx;
+  border: 2rpx solid #fff;
+  box-sizing: border-box;
+}

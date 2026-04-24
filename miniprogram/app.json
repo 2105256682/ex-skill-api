@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/main/main",
+    "pages/plaza/plaza",
+    "pages/plaza-detail/plaza-detail",
+    "pages/chat/chat",
+    "pages/profile/profile",
+    "pages/create/create",
+    "pages/analyze/analyze",
+    "pages/wish-feedback/wish-feedback",
+    "pages/vip/vip",
+    "pages/character-setting/character-setting",
+    "pages/moment/moment",
+    "pages/memory/memory",
+    "pages/wallet/wallet",
+    "pages/mood/mood",
+    "pages/character-edit/character-edit",
+    "pages/share/share",
+    "pages/notification/notification"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#888888",
+    "selectedColor": "#111111",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/plaza/plaza",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/plaza-detail/plaza-detail",
+        "text": "广场"
+      },
+      {
+        "pagePath": "pages/main/main",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

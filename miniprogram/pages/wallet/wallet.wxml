@@ -1,0 +1,191 @@
+<view class="container">
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">‹</text>
+    </view>
+    <text class="nav-title">我的钱包</text>
+  </view>
+
+  <scroll-view class="page-content" scroll-y>
+    <!-- 余额卡片 -->
+    <view class="balance-card">
+      <view class="balance-header">
+        <text class="balance-label">当前余额</text>
+      </view>
+      <view class="balance-amount">
+        <text class="yuan">¥</text>
+        <text class="amount">{{balanceStr}}</text>
+      </view>
+      <text class="balance-hint">可用于购买会员和道具</text>
+    </view>
+
+    <!-- 会员充值 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">充值会员</text>
+      </view>
+
+      <!-- 周卡 -->
+      <view class="vip-card {{selectedVip === 'weekly' ? 'selected' : ''}}" bindtap="selectVip" data-plan="weekly">
+        <view class="check-icon" wx:if="{{selectedVip === 'weekly'}}">✓</view>
+        <view class="vip-row">
+          <view class="vip-info">
+            <text class="vip-name">周卡会员</text>
+            <text class="vip-desc">7天完整体验</text>
+          </view>
+          <view class="vip-price-wrap">
+            <text class="vip-price">6</text>
+            <text class="vip-unit">元</text>
+          </view>
+        </view>
+        <view class="vip-tags">
+          <text class="vip-tag">每日 0.86 元</text>
+          <text class="vip-tag">随时取消</text>
+        </view>
+      </view>
+
+      <!-- 月卡 -->
+      <view class="vip-card {{selectedVip === 'monthly' ? 'selected' : ''}}" bindtap="selectVip" data-plan="monthly">
+        <view class="check-icon" wx:if="{{selectedVip === 'monthly'}}">✓</view>
+        <view class="best-badge">最受欢迎</view>
+        <view class="vip-row">
+          <view class="vip-info">
+            <text class="vip-name">月卡会员</text>
+            <text class="vip-desc">30天畅享全部功能</text>
+          </view>
+          <view class="vip-price-wrap">
+            <text class="vip-price">30</text>
+            <text class="vip-unit">元</text>
+            <text class="original-price">45元</text>
+          </view>
+        </view>
+        <view class="vip-tags">
+          <text class="vip-tag">每日 1 元</text>
+          <text class="save-tag">省 15 元</text>
+        </view>
+      </view>
+
+      <!-- 年卡 -->
+      <view class="vip-card {{selectedVip === 'yearly' ? 'selected' : ''}}" bindtap="selectVip" data-plan="yearly">
+        <view class="check-icon" wx:if="{{selectedVip === 'yearly'}}">✓</view>
+        <view class="best-badge best">超值推荐</view>
+        <view class="vip-row">
+          <view class="vip-info">
+            <text class="vip-name">年卡会员</text>
+            <text class="vip-desc">365天无限使用</text>
+          </view>
+          <view class="vip-price-wrap">
+            <text class="vip-price">166</text>
+            <text class="vip-unit">元</text>
+            <text class="original-price">360元</text>
+          </view>
+        </view>
+        <view class="vip-tags">
+          <text class="vip-tag">每日 0.45 元</text>
+          <text class="save-tag">省 194 元</text>
+        </view>
+      </view>
+
+      <view class="recharge-btn" bindtap="openRechargeModal">
+        立即充值 ¥{{currentPrice}}
+      </view>
+    </view>
+
+    <!-- 交易记录 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">交易记录</text>
+        <view class="filter-tabs">
+          <text class="filter-tab {{currentFilter === 'all' ? 'active' : ''}}" bindtap="filterTx" data-type="all">全部</text>
+          <text class="filter-tab {{currentFilter === 'income' ? 'active' : ''}}" bindtap="filterTx" data-type="income">收入</text>
+          <text class="filter-tab {{currentFilter === 'outcome' ? 'active' : ''}}" bindtap="filterTx" data-type="outcome">支出</text>
+        </view>
+      </view>
+
+      <view class="tx-list">
+        <block wx:for="{{filteredTransactions}}" wx:key="id">
+          <view class="tx-item">
+            <view class="tx-icon {{item.type}}">
+              <text wx:if="{{item.type === 'income'}}">↗</text>
+              <text wx:elif="{{item.type === 'outcome'}}">↘</text>
+              <text wx:else>🎁</text>
+            </view>
+            <view class="tx-info">
+              <view class="tx-row">
+                <text class="tx-title">{{item.title}}</text>
+                <text class="tx-amount {{item.type}}">{{item.type === 'income' ? '+' : '-'}}{{item.amount.toFixed(2)}}</text>
+              </view>
+              <view class="tx-row tx-meta">
+                <text class="tx-desc">{{item.desc}}</text>
+                <text class="tx-date">{{item.date}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view wx:if="{{filteredTransactions.length === 0}}" class="empty-tx">
+          <text class="empty-icon">📋</text>
+          <text class="empty-text">暂无记录</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 充值确认弹窗 -->
+  <view class="modal-overlay {{showRechargeModal ? 'show' : ''}}" bindtap="closeRechargeModal">
+    <view class="modal-content" catchtap="stopProp">
+      <view class="modal-close" bindtap="closeRechargeModal">×</view>
+      <text class="modal-title">确认充值</text>
+      <text class="modal-sub">购买 {{currentPlanName}}</text>
+      
+      <view class="modal-info-card">
+        <view class="info-row">
+          <text class="info-label">会员类型</text>
+          <text class="info-value">{{currentPlanName}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">支付金额</text>
+          <text class="info-price">¥{{currentPrice}}</text>
+        </view>
+      </view>
+
+      <view class="pay-methods">
+        <text class="pay-methods-title">支付方式</text>
+        <view class="pay-method {{selectedPay === 'wechat' ? 'selected' : ''}}" bindtap="selectPay" data-method="wechat">
+          <view class="pay-icon-wrap">
+            <text class="pay-icon-text">微</text>
+          </view>
+          <text class="pay-name">微信支付</text>
+          <view class="radio-circle">
+            <view class="radio-inner" wx:if="{{selectedPay === 'wechat'}}"></view>
+          </view>
+        </view>
+        <view class="pay-method {{selectedPay === 'alipay' ? 'selected' : ''}}" bindtap="selectPay" data-method="alipay">
+          <view class="pay-icon-wrap">
+            <text class="pay-icon-text">支</text>
+          </view>
+          <text class="pay-name">支付宝</text>
+          <view class="radio-circle">
+            <view class="radio-inner" wx:if="{{selectedPay === 'alipay'}}"></view>
+          </view>
+        </view>
+      </view>
+
+      <view class="confirm-btn {{isPaying ? 'paying' : ''}}" bindtap="confirmRecharge">
+        确认支付 ¥{{currentPrice}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 成功弹窗 -->
+  <view class="modal-overlay {{showSuccessModal ? 'show' : ''}}">
+    <view class="success-content">
+      <view class="success-circle">
+        <text class="success-check">✓</text>
+      </view>
+      <text class="success-title">充值成功</text>
+      <text class="success-desc">{{currentPlanName}} 已开通</text>
+      <view class="success-btn" bindtap="closeSuccessModal">完成</view>
+    </view>
+  </view>
+</view>

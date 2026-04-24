@@ -1,0 +1,99 @@
+<view class="container">
+  <!-- 状态栏 -->
+  <view class="status-bar">
+    <text class="status-time">{{currentTime}}</text>
+    <view class="status-icons">
+      <text class="status-icon">◎</text>
+      <text class="status-icon">☰</text>
+    </view>
+  </view>
+
+  <!-- 顶部 -->
+  <view class="top-section">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">‹</text>
+    </view>
+    <view class="header">
+      <text class="header-title">告诉TA你的心情</text>
+      <text class="header-sub">选一个表情，让TA知道你在想什么</text>
+    </view>
+  </view>
+
+  <!-- 心情选择 -->
+  <view class="mood-section">
+    <view class="mood-label">此刻心情</view>
+    <scroll-view class="mood-scroll" scroll-x>
+      <view wx:for="{{moods}}" wx:key="index" class="mood-card {{selectedMood === item.name ? 'active' : ''}}" 
+            data-mood="{{item.name}}" data-color="{{item.color}}" data-emoji="{{item.emoji}}" bindtap="selectMood">
+        <view class="emoji-container">
+          <view class="emoji-fluid" style="background: {{item.gradient}}; box-shadow: {{item.shadow}};">
+            <text class="emoji-face">{{item.emoji}}</text>
+          </view>
+        </view>
+        <text class="mood-card-name">{{item.name}}</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 备注输入 -->
+  <view class="note-section">
+    <view class="note-label">想对TA说</view>
+    <textarea class="note-input" placeholder="今天见到你很开心～" value="{{noteText}}" bindinput="onNoteInput" auto-height />
+  </view>
+
+  <!-- 发送按钮 -->
+  <view class="send-btn" bindtap="sendMood">
+    <text class="send-text">发送给TA</text>
+  </view>
+
+  <!-- 我的心情卡片 -->
+  <view class="my-mood-card {{showMyMood ? 'show' : ''}}">
+    <view class="my-mood-header">
+      <view class="my-avatar">
+        <text class="avatar-text">我</text>
+      </view>
+      <view class="my-mood-info">
+        <text class="my-mood-title">我的心情</text>
+        <text class="my-mood-time">{{myMoodTime}}</text>
+      </view>
+    </view>
+    <view class="my-mood-body">
+      <text class="my-mood-emoji">{{selectedMoodEmoji}}</text>
+      <text class="my-mood-text">{{noteText || '今天的心情...'}}</text>
+    </view>
+  </view>
+
+  <!-- TA的动态流 -->
+  <view class="feed-section">
+    <view class="feed-header">
+      <view class="feed-title">TA的动态</view>
+      <view class="feed-tabs">
+        <view class="feed-tab {{feedTab === 'all' ? 'active' : ''}}" bindtap="switchFeedTab" data-tab="all">所有</view>
+        <view class="feed-tab {{feedTab === 'recent' ? 'active' : ''}}" bindtap="switchFeedTab" data-tab="recent">刚刚</view>
+      </view>
+    </view>
+
+    <view class="message-list">
+      <view wx:for="{{feeds}}" wx:key="index" wx:if="{{feedTab === 'all' || item.isRecent}}" class="message-item">
+        <view class="message-avatar" style="background: {{item.avatarBg}};">
+          <text class="avatar-icon">{{item.avatar}}</text>
+        </view>
+        <view class="message-content">
+          <view class="message-bubble" style="--accent-color: {{item.accentColor}};">
+            <text class="message-text">{{item.text}}</text>
+            <view class="message-meta">
+              <view class="message-mood-tag" style="background: {{item.tagBg}}; color: {{item.tagColor}};">
+                {{item.moodEmoji}} {{item.moodName}}
+              </view>
+              <text class="message-time">{{item.time}}</text>
+            </view>
+          </view>
+          <view class="message-reply-btn" bindtap="quickReply" data-text="{{item.replyText}}">回复</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 提示 -->
+<view class="toast {{showToast ? 'show' : ''}}">{{toastText}}</view>

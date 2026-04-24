@@ -1,0 +1,65 @@
+<view class="container">
+  <view class="header-section">
+    <text class="title">创建账号</text>
+    <text class="subtitle">Create account</text>
+  </view>
+
+  <view class="form-section">
+    <!-- 昵称 -->
+    <view class="input-group">
+      <view class="input-wrapper">
+        <input class="input-field" type="text" placeholder=" " placeholder-class="input-placeholder"
+          value="{{nickname}}" bindinput="onNicknameInput" />
+        <text class="float-label">昵称</text>
+      </view>
+    </view>
+
+    <!-- 账号 -->
+    <view class="input-group">
+      <view class="input-wrapper">
+        <input class="input-field" type="text" placeholder=" " placeholder-class="input-placeholder"
+          value="{{account}}" bindinput="onAccountInput" />
+        <text class="float-label">账号</text>
+      </view>
+    </view>
+
+    <!-- 密码 -->
+    <view class="input-group">
+      <view class="input-wrapper">
+        <input class="input-field" type="{{showPwd ? 'text' : 'password'}}" placeholder=" " placeholder-class="input-placeholder"
+          value="{{password}}" bindinput="onPasswordInput" />
+        <text class="float-label">密码（至少6位）</text>
+        <view class="pwd-toggle" bindtap="togglePwd">
+          <text class="eye-text">{{showPwd ? '隐藏' : '显示'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 确认密码 -->
+    <view class="input-group">
+      <view class="input-wrapper">
+        <input class="input-field" type="{{showPwd2 ? 'text' : 'password'}}" placeholder=" " placeholder-class="input-placeholder"
+          value="{{password2}}" bindinput="onPassword2Input" />
+        <text class="float-label">确认密码</text>
+        <view class="pwd-toggle" bindtap="togglePwd2">
+          <text class="eye-text">{{showPwd2 ? '隐藏' : '显示'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 注册按钮 -->
+    <view class="register-btn {{loading ? 'loading' : ''}}" bindtap="onRegister">
+      <text wx:if="{{!loading}}">注册</text>
+      <text wx:else>注册中...</text>
+    </view>
+
+    <!-- 已有账号 -->
+    <view class="go-login" bindtap="goLogin">
+      <text class="go-login-text">已有账号？去登录</text>
+    </view>
+  </view>
+
+  <view class="error-toast {{errorMsg ? 'show' : ''}}">
+    <text>{{errorMsg}}</text>
+  </view>
+</view>

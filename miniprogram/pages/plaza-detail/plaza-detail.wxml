@@ -1,0 +1,8 @@
+<view class="container">
+  <view class="content">
+    <text class="emoji">🔍</text>
+    <text class="text">广场功能</text>
+    <text class="sub">还未开发</text>
+    <text class="desc">敬请期待</text>
+  </view>
+</view>

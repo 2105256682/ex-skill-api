@@ -1,0 +1,225 @@
+.container {
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+/* 顶部导航栏 */
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 88rpx;
+  padding-top: env(safe-area-inset-top);
+  background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid rgba(0,0,0,0.05);
+  z-index: 100;
+}
+
+.nav-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #333;
+  letter-spacing: 2rpx;
+}
+
+.add-btn {
+  position: absolute;
+  right: 32rpx;
+  bottom: 12rpx;
+  width: 56rpx;
+  height: 56rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.4);
+}
+
+.add-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 2rpx 6rpx rgba(102, 126, 234, 0.3);
+}
+
+.add-icon {
+  font-size: 36rpx;
+  color: #fff;
+  font-weight: 400;
+  margin-top: -2rpx;
+}
+
+/* 人格列表 */
+.persona-list {
+  padding-top: 120rpx;
+}
+
+/* 置顶卡片 - 贴顶设计 */
+.top-card {
+  background: #111;
+  margin: 0;
+  padding: 28rpx 32rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 左侧装饰线 */
+.top-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6rpx;
+  background: #111;
+}
+
+/* 右上角装饰 */
+.top-card::after {
+  content: '✦';
+  position: absolute;
+  top: 16rpx;
+  right: 24rpx;
+  font-size: 24rpx;
+  color: rgba(255,255,255,0.15);
+}
+
+.top-quote {
+  font-size: 28rpx;
+  color: rgba(255,255,255,0.95);
+  line-height: 1.7;
+  letter-spacing: 3rpx;
+  font-weight: 300;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2rpx 12rpx rgba(0,0,0,0.3);
+}
+
+.persona-item {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  margin-bottom: 2rpx;
+  margin-top: 0;
+}
+
+/* 可点击区域 */
+.item-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 28rpx 0 28rpx 32rpx;
+}
+
+.item-content:active {
+  background: #f5f5f5;
+}
+
+/* 左：头像 */
+.avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 16rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.avatar-text {
+  font-size: 50rpx;
+}
+
+.status-dot {
+  position: absolute;
+  bottom: -4rpx;
+  right: -4rpx;
+  width: 24rpx;
+  height: 24rpx;
+  background: #07c160;
+  border-radius: 50%;
+  border: 4rpx solid #fff;
+}
+
+/* 中：信息 */
+.persona-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+
+.name {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.preview {
+  font-size: 26rpx;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 右：删除按钮 */
+.delete-btn {
+  width: 80rpx;
+  height: 156rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-icon {
+  font-size: 36rpx;
+  color: #ccc;
+  padding: 0 20rpx;
+}
+
+.delete-btn:active .delete-icon {
+  color: #ff4d4f;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 500rpx;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 32rpx;
+}
+
+.empty-title {
+  font-size: 36rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.empty-desc {
+  font-size: 28rpx;
+  color: #999;
+}

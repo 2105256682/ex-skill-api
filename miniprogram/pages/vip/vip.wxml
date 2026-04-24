@@ -1,0 +1,176 @@
+<view class="container">
+  <!-- 顶部导航 -->
+  <view class="nav-bar">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">‹</text>
+    </view>
+    <text class="nav-title">会员中心</text>
+  </view>
+
+  <scroll-view class="page-content" scroll-y>
+    <!-- 会员状态卡片 -->
+    <view class="vip-status-card" wx:if="{{isVip}}">
+      <view class="vip-header">
+        <view class="vip-badge">
+          <text class="badge-icon">⭐</text>
+          <text class="badge-text">月卡会员</text>
+        </view>
+        <text class="expire-date">{{vipExpireTime}} 到期</text>
+      </view>
+
+      <view class="vip-main">
+        <!-- 进度环 -->
+        <view class="progress-ring">
+          <view class="ring-bg"></view>
+          <view class="ring-fill" style="transform: rotate(-90deg);"></view>
+          <view class="ring-content">
+            <text class="days-num">0</text>
+            <text class="days-label">天剩余</text>
+          </view>
+        </view>
+
+        <!-- 权益列表 -->
+        <view class="rights-list">
+          <text class="rights-title">会员权益</text>
+          <view class="right-item">
+            <text class="check-icon">✓</text>
+            <text class="right-text">自定义声音</text>
+          </view>
+          <view class="right-item">
+            <text class="check-icon">✓</text>
+            <text class="right-text">每日领 300 币</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="renew-btn" bindtap="renewVip">
+        <text>续费会员</text>
+      </view>
+    </view>
+
+    <!-- 非会员提示 -->
+    <view class="vip-status-card not-vip" wx:if="{{!isVip}}">
+      <view class="not-vip-content">
+        <text class="not-vip-icon">👑</text>
+        <text class="not-vip-title">开通会员</text>
+        <text class="not-vip-desc">解锁更多权益，体验完整功能</text>
+      </view>
+      <view class="renew-btn" bindtap="renewVip">
+        <text>立即开通</text>
+      </view>
+    </view>
+
+    <!-- Veixll 币 -->
+    <view class="coin-cards">
+      <view class="coin-card" bindtap="goRecharge">
+        <view class="coin-header">
+          <view class="coin-icon">🪙</view>
+          <text class="coin-label">Veixll 币</text>
+        </view>
+        <text class="coin-balance">{{coinBalance}}</text>
+        <text class="coin-tip">可用于购买道具</text>
+      </view>
+
+      <view class="coin-card" bindtap="showCoinUsage">
+        <view class="coin-header">
+          <view class="usage-icon-wrap">
+            <text class="usage-icon">📊</text>
+          </view>
+          <text class="coin-label">已使用</text>
+        </view>
+        <text class="coin-balance">{{pointBalance}}</text>
+        <text class="coin-tip">本月消耗</text>
+      </view>
+    </view>
+
+    <!-- 使用明细 -->
+    <view class="usage-section">
+      <view class="section-header">
+        <text class="section-title">使用明细</text>
+      </view>
+      <view class="tab-switch">
+        <view class="tab-btn {{currentTab === 'coin' ? 'active' : ''}}" bindtap="switchTab" data-tab="coin">🪙 币明细</view>
+        <view class="tab-btn {{currentTab === 'vip' ? 'active' : ''}}" bindtap="switchTab" data-tab="vip">⭐ 会员记录</view>
+      </view>
+    </view>
+
+    <!-- 币明细 -->
+    <view class="usage-list" wx:if="{{currentTab === 'coin'}}">
+      <view class="usage-item" wx:for="{{usageList}}" wx:key="id">
+        <view class="usage-icon-wrap" style="background: #fafafa;">{{item.icon}}</view>
+        <view class="usage-info">
+          <view class="usage-top">
+            <text class="usage-title">{{item.title}}</text>
+            <text class="usage-amount {{item.type === 'income' ? 'in' : ''}}">{{item.type === 'income' ? '+' : '-'}}{{item.amount}}</text>
+          </view>
+          <view class="usage-bottom">
+            <text class="usage-desc">{{item.desc}}</text>
+            <text class="usage-date">{{item.date}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="empty-usage" wx:if="{{usageList.length === 0}}">
+        <text>暂无使用记录</text>
+      </view>
+    </view>
+
+    <!-- 会员记录 -->
+    <view class="usage-list" wx:if="{{currentTab === 'vip'}}">
+      <view class="usage-item" wx:for="{{usageList}}" wx:key="id" wx:if="{{item.type === 'vip'}}">
+        <view class="usage-icon-wrap" style="background: #f0f0f0;">⭐</view>
+        <view class="usage-info">
+          <view class="usage-top">
+            <text class="usage-title">{{item.title}}</text>
+            <view class="status-tag {{item.status === 'active' ? 'active' : ''}}">{{item.status === 'active' ? '生效中' : '已过期'}}</view>
+          </view>
+          <view class="usage-bottom">
+            <text class="usage-desc">{{item.desc}}</text>
+            <text class="usage-date">{{item.date}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="empty-usage" wx:if="{{!hasVipRecord}}">
+        <text>暂无会员记录</text>
+      </view>
+    </view>
+
+    <!-- 更多服务 -->
+    <view class="more-section">
+      <text class="section-title">更多服务</text>
+      <view class="menu-list">
+        <view class="menu-item" bindtap="goRecharge">
+          <view class="menu-icon-box">
+            <text class="menu-icon">+</text>
+          </view>
+          <view class="menu-info">
+            <text class="menu-title">充值 Veixll 币</text>
+            <text class="menu-sub">购买更多虚拟货币</text>
+          </view>
+          <text class="menu-arrow">›</text>
+        </view>
+
+        <view class="menu-item" bindtap="goWish">
+          <view class="menu-icon-box">
+            <text class="menu-icon">⭐</text>
+          </view>
+          <view class="menu-info">
+            <text class="menu-title">许愿与反馈</text>
+            <text class="menu-sub">提交你的愿望和建议</text>
+          </view>
+          <text class="menu-arrow">›</text>
+        </view>
+
+        <view class="menu-item" bindtap="goWallet">
+          <view class="menu-icon-box">
+            <text class="menu-icon">💳</text>
+          </view>
+          <view class="menu-info">
+            <text class="menu-title">我的钱包</text>
+            <text class="menu-sub">查看余额和交易记录</text>
+          </view>
+          <text class="menu-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

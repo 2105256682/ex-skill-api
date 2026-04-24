@@ -1,0 +1,230 @@
+page {
+  background: #fff;
+  height: 100%;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+/* ── 顶部导航 ── */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 24rpx;
+  padding-top: calc(env(safe-area-inset-top) + 20rpx);
+  background: #fff;
+  flex-shrink: 0;
+}
+.back-btn {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-arrow {
+  font-size: 64rpx;
+  color: #333;
+  font-weight: 300;
+}
+.top-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #000;
+}
+.placeholder {
+  width: 72rpx;
+}
+
+/* ── 步骤指示器 ── */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 40rpx 0;
+}
+.step {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: #e5e5e5;
+  color: #999;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+.step.active {
+  background: #000;
+  color: #fff;
+}
+.step-line {
+  width: 80rpx;
+  height: 4rpx;
+  background: #e5e5e5;
+}
+.step-line.active {
+  background: #000;
+}
+
+/* ── 内容区 ── */
+.step-content {
+  flex: 1;
+  padding: 0 40rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-section {
+  margin-bottom: 40rpx;
+}
+.section-title {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #000;
+  display: block;
+  margin-bottom: 16rpx;
+}
+.section-desc {
+  font-size: 28rpx;
+  color: #888;
+  display: block;
+  margin-bottom: 32rpx;
+}
+
+/* ── 名称输入 ── */
+.name-input {
+  width: 100%;
+  height: 100rpx;
+  background: #f5f5f5;
+  border-radius: 24rpx;
+  padding: 0 32rpx;
+  font-size: 34rpx;
+  color: #000;
+  border: none;
+}
+
+/* ── 提示框 ── */
+.tip-box {
+  background: #f8f8f8;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: auto;
+}
+.tip-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 12rpx;
+}
+.tip-text {
+  font-size: 26rpx;
+  color: #666;
+  display: block;
+  line-height: 1.5;
+}
+
+/* ── 导入选项 ── */
+.import-options {
+  display: flex;
+  gap: 24rpx;
+  margin-bottom: 40rpx;
+}
+.import-option {
+  flex: 1;
+  background: #f8f8f8;
+  border-radius: 24rpx;
+  padding: 32rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+.import-option:active {
+  background: #f0f0f0;
+}
+.option-icon {
+  font-size: 56rpx;
+}
+.option-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #000;
+}
+.option-desc {
+  font-size: 22rpx;
+  color: #888;
+}
+
+/* ── 聊天记录输入 ── */
+.records-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32rpx;
+}
+.records-label {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 16rpx;
+}
+.records-input {
+  flex: 1;
+  min-height: 300rpx;
+  background: #f8f8f8;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.6;
+  border: none;
+}
+.records-hint {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 16rpx;
+}
+
+/* ── 底部按钮 ── */
+.bottom-btn {
+  display: flex;
+  gap: 24rpx;
+  padding: 24rpx 0;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 24rpx);
+}
+.btn-primary {
+  flex: 1;
+  height: 96rpx;
+  background: #000;
+  border-radius: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #fff;
+}
+.btn-primary.disabled {
+  background: #ccc;
+}
+.btn-primary:active {
+  opacity: 0.8;
+}
+.btn-text {
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  color: #888;
+  padding: 0 24rpx;
+}

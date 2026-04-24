@@ -1,0 +1,375 @@
+/* 页面容器 */
+.container {
+  min-height: 100vh;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* 状态栏 */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px 0;
+  height: 44px;
+}
+
+.time {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+}
+
+.status-icons {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.status-icon {
+  font-size: 14px;
+}
+
+/* 顶部导航 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+}
+
+.header-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e8e8e8;
+}
+
+.header-icon {
+  font-size: 20px;
+  color: #000;
+  font-weight: 300;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+}
+
+/* 页面内容 */
+.page-content {
+  padding: 0 24px 40px;
+  height: calc(100vh - 100px);
+  box-sizing: border-box;
+}
+
+/* 头像区域 */
+.avatar-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #1a1a1a;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+
+.avatar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.avatar-wrapper:active .avatar-overlay {
+  opacity: 1;
+}
+
+.camera-icon {
+  font-size: 32px;
+}
+
+/* 基本信息行 */
+.basic-info {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: #f5f5f7;
+  border-radius: 16px;
+  padding: 12px 16px;
+  flex: 1;
+  border: 2px solid transparent;
+}
+
+.input-group:focus-within {
+  background: #ffffff;
+  border-color: #000000;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08);
+}
+
+.input-icon {
+  font-size: 20px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.input-group input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  color: #1c1c1e;
+  width: 100%;
+}
+
+.input-group input::placeholder {
+  color: #c7c7cc;
+}
+
+/* 性别选择 */
+.gender-select {
+  display: flex;
+  align-items: center;
+  background: #f5f5f7;
+  border-radius: 16px;
+  padding: 12px 16px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  min-width: 100px;
+}
+
+.gender-select:active {
+  background: #ffffff;
+  border-color: #000000;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08);
+}
+
+.gender-text {
+  font-size: 16px;
+  color: #1c1c1e;
+  flex: 1;
+}
+
+.arrow {
+  font-size: 10px;
+  color: #8e8e93;
+  margin-left: 8px;
+}
+
+/* 角色性格 */
+.section {
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 14px;
+  color: #8e8e93;
+  margin-bottom: 12px;
+  padding-left: 4px;
+  font-weight: 500;
+}
+
+.tag-input-wrapper {
+  background: #f5f5f7;
+  border-radius: 20px;
+  padding: 16px;
+  border: 2px solid transparent;
+}
+
+.tag-input-wrapper:focus-within {
+  background: #ffffff;
+  border-color: #000000;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08);
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  background: #000000;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.tag .remove {
+  margin-left: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+  font-size: 16px;
+}
+
+.tag .remove:active {
+  opacity: 1;
+}
+
+.tag-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  color: #1c1c1e;
+  min-height: 24px;
+}
+
+.tag-input::placeholder {
+  color: #c7c7cc;
+}
+
+/* 分割线 */
+.divider {
+  height: 1px;
+  background: #e5e5ea;
+  margin: 32px 0;
+  position: relative;
+}
+
+.divider-text {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ffffff;
+  padding-right: 12px;
+  font-size: 14px;
+  color: #8e8e93;
+  font-weight: 500;
+}
+
+/* 大文本区域 */
+.big-section {
+  margin-bottom: 24px;
+}
+
+.big-label {
+  display: inline-block;
+  background: #f5f5f7;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1c1c1e;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.big-label.active {
+  background: #000000;
+  color: white;
+}
+
+.textarea-wrapper {
+  background: #f5f5f7;
+  border-radius: 24px;
+  padding: 20px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.textarea-wrapper.active {
+  background: #ffffff;
+  border-color: #000000;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.08);
+}
+
+.textarea-wrapper.active .big-label {
+  background: #000000;
+  color: white;
+}
+
+.text-area {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1c1c1e;
+  resize: none;
+  min-height: 120px;
+}
+
+.text-area::placeholder {
+  color: #c7c7cc;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 12px;
+  color: #c7c7cc;
+  margin-top: 8px;
+}
+
+/* 提交按钮 */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 16px;
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 16px;
+}
+
+.submit-btn:active {
+  background: #1a1a1a;
+}
+
+.hint {
+  display: block;
+  text-align: center;
+  color: #c7c7cc;
+  font-size: 13px;
+  margin-top: 16px;
+}

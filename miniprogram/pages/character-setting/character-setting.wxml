@@ -1,0 +1,112 @@
+<view class="container">
+  <view class="content-layer">
+    <!-- 状态栏 -->
+    <view class="status-bar">
+      <text class="time">2:29</text>
+      <view class="status-icons">
+        <text class="status-icon">◎</text>
+        <text class="status-icon">☰</text>
+      </view>
+    </view>
+
+    <!-- 顶部导航 -->
+    <view class="header">
+      <view class="header-btn" bindtap="goBack">
+        <text class="header-icon">‹</text>
+      </view>
+      <text class="header-title">角色信息</text>
+      <view class="header-btn" bindtap="closePage">
+        <text class="header-icon">✕</text>
+      </view>
+    </view>
+
+    <!-- 头像和问候 -->
+    <view class="greeting-section">
+      <view class="avatar" bindtap="chooseImage">
+        <image class="avatar-img" src="{{avatarUrl}}" mode="aspectFill" wx:if="{{avatarUrl}}" />
+        <text class="avatar-placeholder" wx:else>👤</text>
+      </view>
+      <view class="greeting-text">
+        <text class="greeting-hi">Hi, {{name || 'Vexill'}}!</text>
+        <text class="greeting-main">今天过得怎么样？</text>
+      </view>
+    </view>
+
+    <view class="divider"></view>
+
+    <!-- 功能卡片 -->
+    <view class="cards-container">
+      <!-- 编辑人设 -->
+      <view class="card" bindtap="editCharacter">
+        <view class="card-visual">
+          <view class="translate-visual">
+            <view class="translate-card card-icon-bg">
+              <text class="card-icon-text">👤</text>
+            </view>
+            <view class="translate-card card-icon-wen">
+              <text class="card-icon-wen-text">✏️</text>
+            </view>
+          </view>
+        </view>
+        <view class="card-label">
+          <view class="card-label-icon">✏️</view>
+          <text class="card-label-text">编辑人设</text>
+        </view>
+      </view>
+
+      <!-- 记忆 -->
+      <view class="card" bindtap="goMemory">
+        <view class="card-visual">
+          <view class="card-icon-wrap">
+            <text class="icon-large">📖</text>
+          </view>
+        </view>
+        <view class="card-label">
+          <view class="card-label-icon">📖</view>
+          <text class="card-label-text">记忆</text>
+        </view>
+      </view>
+
+      <!-- 语音 -->
+      <view class="card" bindtap="goVoice">
+        <view class="card-visual">
+          <view class="files-visual">
+            <view class="file-icon pdf-icon">
+              <text class="pdf-text">🎤</text>
+            </view>
+            <view class="file-icon doc-icon">
+              <text class="doc-lines-text">|||</text>
+            </view>
+          </view>
+        </view>
+        <view class="card-label">
+          <view class="card-label-icon">🎤</view>
+          <text class="card-label-text">语音</text>
+        </view>
+      </view>
+
+      <!-- 动态 -->
+      <view class="card" bindtap="goDynamic">
+        <view class="card-visual">
+          <view class="images-visual">
+            <view class="img-card img1-icon">
+              <text class="img-icon-text">📷</text>
+            </view>
+            <view class="img-card img2-icon">
+              <text class="img-icon-text">🖼️</text>
+            </view>
+            <view class="img-card img3-icon">
+              <text class="img-icon-text">⚡</text>
+            </view>
+          </view>
+        </view>
+        <view class="card-label">
+          <view class="card-label-icon">⚡</view>
+          <text class="card-label-text">动态</text>
+        </view>
+      </view>
+    </view>
+
+
+  </view>
+</view>

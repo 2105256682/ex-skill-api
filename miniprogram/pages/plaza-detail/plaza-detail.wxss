@@ -1,0 +1,40 @@
+page {
+  background: #fff;
+  height: 100%;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.emoji {
+  font-size: 120rpx;
+  margin-bottom: 40rpx;
+}
+
+.text {
+  font-size: 48rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.sub {
+  font-size: 36rpx;
+  color: #666;
+  margin-bottom: 12rpx;
+}
+
+.desc {
+  font-size: 28rpx;
+  color: #999;
+}

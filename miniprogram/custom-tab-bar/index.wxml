@@ -1,0 +1,54 @@
+<view class="tab-bar">
+  <view class="tab-bar-border"></view>
+
+  <!-- 左侧组 -->
+  <view class="tab-left-group">
+    <!-- 首页 -->
+    <view class="tab-item {{selected===0?'active':''}}" data-index="0" bindtap="switchTab">
+      <view class="icon-wrap">
+        <image class="tab-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAxMC41TDEyIDNsOSA3LjVWMjFIM1YxMC41eiIgc3Ryb2tlPSIjODg4ODg4IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik05IDIxdi02aDZ2NiIgc3Ryb2tlPSIjODg4ODg4IiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==" mode="aspectFit" wx:if="{{selected!==0}}"/>
+        <image class="tab-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMyAxMC41TDEyIDNsOSA3LjVWMjFIM1YxMC41eiIgc3Ryb2tlPSIjMTExMTExIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjxwYXRoIGQ9Ik05IDIxdi02aDZ2NiIgc3Ryb2tlPSIjMTExMTExIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==" mode="aspectFit" wx:if="{{selected===0}}"/>
+      </view>
+      <text class="tab-label">首页</text>
+    </view>
+
+    <!-- 广场 -->
+    <view class="tab-item {{selected===1?'active':''}}" data-index="1" bindtap="switchTab">
+      <view class="icon-wrap">
+        <image class="tab-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMCIgc3Ryb2tlPSIjODg4ODg4IiBzdHJva2Utd2lkdGg9IjEuOCIvPjxwYXRoIGQ9Ik0yIDEyaDIwTTEyIDJhMTUuMyAxNS4zIDAgMDEwIDIwTTEyIDJhMTUuMyAxNS4zIDAgMDAwIDIwIiBzdHJva2U9IiM4ODg4ODgiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=" mode="aspectFit" wx:if="{{selected!==1}}"/>
+        <image class="tab-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMCIgc3Ryb2tlPSIjMTExMTExIiBzdHJva2Utd2lkdGg9IjEuOCIvPjxwYXRoIGQ9Ik0yIDEyaDIwTTEyIDJhMTUuMyAxNS4zIDAgMDEwIDIwTTEyIDJhMTUuMyAxNS4zIDAgMDAwIDIwIiBzdHJva2U9IiMxMTExMTEiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=" mode="aspectFit" wx:if="{{selected===1}}"/>
+      </view>
+      <text class="tab-label">广场</text>
+    </view>
+  </view>
+
+  <!-- 中间 + 按钮 -->
+  <view class="add-btn-wrap" bindtap="onAdd">
+    <view class="add-btn">
+      <view class="plus-h"></view>
+      <view class="plus-v"></view>
+    </view>
+  </view>
+
+  <!-- 右侧组 -->
+  <view class="tab-right-group">
+    <!-- 消息 -->
+    <view class="tab-item {{selected===2?'active':''}}" data-index="2" bindtap="switchTab">
+      <view class="icon-wrap" style="position:relative;">
+        <image class="tab-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgM0M3LjAzIDMgMyA2LjgyIDMgMTEuNWMwIDIuMTMuODQgNC4wOCAyLjIyIDUuNTdMNCAyMWw0LjMtMS40MkE5LjIgOS4yIDAgMDAxMiAyMGM0Ljk3IDAgOS0zLjgyIDktOC41UzE2Ljk3IDMgMTIgM3oiIHN0cm9rZT0iIzg4ODg4OCIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48Y2lyY2xlIGN4PSI4IiBjeT0iMTEuNSIgcj0iMSIgZmlsbD0iIzg4ODg4OCIvPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTEuNSIgcj0iMSIgZmlsbD0iIzg4ODg4OCIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMTEuNSIgcj0iMSIgZmlsbD0iIzg4ODg4OCIvPjxjaXJjbGUgY3g9IjE4IiBjeT0iMTEuNSIgcj0iMSIgZmlsbD0iIzg4ODg4OCIvPjwvc3ZnPg==" mode="aspectFit" wx:if="{{selected!==2}}"/>
+        <image class="tab-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgM0M3LjAzIDMgMyA2LjgyIDMgMTEuNWMwIDIuMTMuODQgNC4wOCAyLjIyIDUuNTdMNCAyMWw0LjMtMS40MkE5LjIgOS4yIDAgMDAxMiAyMGM0Ljk3IDAgOS0zLjgyIDktOC41UzE2Ljk3IDMgMTIgM3oiIHN0cm9rZT0iIzExMTExMSIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48Y2lyY2xlIGN4PSI4IiBjeT0iMTEuNSIgcj0iMSIgZmlsbD0iIzExMTExMSIvPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTEuNSIgcj0iMSIgZmlsbD0iIzExMTExMSIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMTEuNSIgcj0iMSIgZmlsbD0iIzExMTExMSIvPjxjaXJjbGUgY3g9IjE4IiBjeT0iMTEuNSIgcj0iMSIgZmlsbD0iIzExMTExMSIvPjwvc3ZnPg==" mode="aspectFit" wx:if="{{selected===2}}"/>
+        <view class="msg-dot"></view>
+      </view>
+      <text class="tab-label">消息</text>
+    </view>
+
+    <!-- 我 -->
+    <view class="tab-item {{selected===3?'active':''}}" data-index="3" bindtap="switchTab">
+      <view class="icon-wrap">
+        <image class="tab-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjAgMjF2LTJhNCA0IDAgMDAtNC00SDhhNCA0IDAgMDAtNCA0djJNMTIgMTFhNCA0IDAgMTAwLTggNCA0IDAgMDAwIDh6IiBzdHJva2U9IiM4ODg4ODgiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=" mode="aspectFit" wx:if="{{selected!==3}}"/>
+        <image class="tab-img" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMjAgMjF2LTJhNCA0IDAgMDAtNC00SDhhNCA0IDAgMDAtNCA0djJNMTIgMTFhNCA0IDAgMTAwLTggNCA0IDAgMDAwIDh6IiBzdHJva2U9IiMxMTExMTEiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=" mode="aspectFit" wx:if="{{selected===3}}"/>
+      </view>
+      <text class="tab-label">我</text>
+    </view>
+  </view>
+</view>

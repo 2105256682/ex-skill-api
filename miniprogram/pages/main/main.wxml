@@ -1,0 +1,53 @@
+<view class="container">
+  <!-- 顶部标题栏 -->
+  <view class="nav-bar">
+    <text class="nav-title">消息</text>
+  </view>
+
+  <!-- 人格列表 -->
+  <view class="persona-list">
+    <!-- 置顶卡片 -->
+    <view class="top-card">
+      <text class="top-quote">幻境在美终是梦，珍惜眼前始为真</text>
+    </view>
+
+    <view 
+      class="persona-item"
+      wx:for="{{personas}}" 
+      wx:key="id"
+    >
+      <!-- 点击进入聊天 -->
+      <view class="item-content" data-id="{{item.id}}" bindtap="onChat">
+        <!-- 左：头像 -->
+        <view class="avatar">
+          <text class="avatar-text">{{item.emoji}}</text>
+          <view class="status-dot"></view>
+        </view>
+        
+        <!-- 中：名字和描述 -->
+        <view class="persona-info">
+          <view class="name-row">
+            <text class="name">{{item.name}}</text>
+            <text class="time" wx:if="{{item.lastChat}}">{{item.lastChat}}</text>
+          </view>
+          <text class="preview">点击开始聊天 →</text>
+        </view>
+      </view>
+
+      <!-- 右：删除按钮 -->
+      <view 
+        class="delete-btn"
+        catchtap="onDeletePersona"
+        data-id="{{item.id}}"
+      >
+        <text class="delete-icon">×</text>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{personas.length === 0}}">
+      <text class="empty-title">还没有人格</text>
+      <text class="empty-desc">点击右上角+创建一个</text>
+    </view>
+  </view>
+</view>

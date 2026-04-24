@@ -1,0 +1,33 @@
+<view class="container">
+  <!-- 顶部导航 -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">‹</text>
+    </view>
+    <text class="header-title">消息通知</text>
+    <view class="placeholder"></view>
+  </view>
+
+  <!-- 通知列表 -->
+  <view class="notification-list">
+    <view class="notification-item {{item.read ? 'read' : ''}}" wx:for="{{notifications}}" wx:key="id" bindtap="readNotification" data-id="{{item.id}}">
+      <view class="notification-icon {{item.type}}">
+        <text>{{item.icon}}</text>
+      </view>
+      <view class="notification-content">
+        <view class="notification-top">
+          <text class="notification-title">{{item.title}}</text>
+          <text class="notification-time">{{item.time}}</text>
+        </view>
+        <text class="notification-desc">{{item.desc}}</text>
+      </view>
+      <view class="unread-dot" wx:if="{{!item.read}}"></view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{notifications.length === 0}}">
+    <text class="empty-icon">🔔</text>
+    <text class="empty-text">暂无新消息</text>
+  </view>
+</view>

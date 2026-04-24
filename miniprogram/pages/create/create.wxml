@@ -1,0 +1,92 @@
+<view class="container">
+  <!-- 顶部导航 -->
+  <view class="top-bar">
+    <view class="back-btn" bindtap="onBack">
+      <text class="back-arrow">‹</text>
+    </view>
+    <text class="top-title">创建AI人格</text>
+    <view class="placeholder"></view>
+  </view>
+
+  <!-- 步骤1：填写名称 -->
+  <view wx:if="{{step === 1}}" class="step-content">
+    <view class="step-indicator">
+      <view class="step active">1</view>
+      <view class="step-line"></view>
+      <view class="step">2</view>
+      <view class="step-line"></view>
+      <view class="step">3</view>
+    </view>
+
+    <view class="form-section">
+      <text class="section-title">给你的AI取个名字</text>
+      <input
+        class="name-input"
+        type="text"
+        placeholder="例如：小美、小明、老婆..."
+        value="{{personaName}}"
+        bindinput="onNameInput"
+        maxlength="20"
+      />
+    </view>
+
+    <view class="tip-box">
+      <text class="tip-title">💡 提示</text>
+      <text class="tip-text">这个名字就是AI在聊天时显示的名字</text>
+    </view>
+
+    <view class="bottom-btn">
+      <view class="btn-primary" bindtap="onNextStep">下一步</view>
+    </view>
+  </view>
+
+  <!-- 步骤2：导入聊天记录 -->
+  <view wx:if="{{step === 2}}" class="step-content">
+    <view class="step-indicator">
+      <view class="step active">✓</view>
+      <view class="step-line active"></view>
+      <view class="step active">2</view>
+      <view class="step-line"></view>
+      <view class="step">3</view>
+    </view>
+
+    <view class="form-section">
+      <text class="section-title">导入聊天记录</text>
+      <text class="section-desc">让AI学习这个人的说话风格</text>
+      
+      <!-- 导入方式选择 -->
+      <view class="import-options">
+        <view class="import-option" bindtap="onSelectImport" data-type="text">
+          <text class="option-icon">📝</text>
+          <text class="option-title">手动粘贴</text>
+          <text class="option-desc">直接复制聊天记录</text>
+        </view>
+        <view class="import-option" bindtap="onSelectImport" data-type="file">
+          <text class="option-icon">📁</text>
+          <text class="option-title">文件导入</text>
+          <text class="option-desc">选择导出的聊天文件</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 聊天记录输入 -->
+    <view class="records-section">
+      <text class="records-label">粘贴聊天记录</text>
+      <textarea
+        class="records-input"
+        placeholder="将聊天记录粘贴到此处...&#10;&#10;格式示例：&#10;对方: 你好呀&#10;对方: 今天吃了什么&#10;对方: 晚安～"
+        value="{{chatRecords}}"
+        bindinput="onRecordsInput"
+        maxlength="10000"
+      />
+      <text class="records-hint">聊天记录越多，AI越像她</text>
+    </view>
+
+    <view class="bottom-btn">
+      <view class="btn-text" bindtap="onPrevStep">上一步</view>
+      <view class="btn-primary {{chatRecords.length < 50 ? 'disabled' : ''}}" bindtap="onStartAnalyze">
+        开始分析
+      </view>
+    </view>
+  </view>
+</view>

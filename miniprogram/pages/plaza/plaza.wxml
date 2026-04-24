@@ -1,0 +1,85 @@
+<view class="container">
+  <!-- 顶部导航 -->
+  <view class="top-nav">
+    <view class="nav-icon" bindtap="onNotice">
+      <text class="icon">🔔</text>
+      <view class="badge" wx:if="{{hasNotice}}"></view>
+    </view>
+    <view class="nav-icon" bindtap="onMessage">
+      <text class="icon">💬</text>
+      <view class="badge" wx:if="{{hasMessage}}"></view>
+    </view>
+  </view>
+
+  <!-- 置顶公告卡片 -->
+  <view class="notice-card">
+    <view class="notice-icon">📢</view>
+    <view class="notice-content">
+      <text class="notice-title">置顶公告</text>
+      <text class="notice-subtitle">Are you happy today?</text>
+    </view>
+    <view class="notice-tag">NEW</view>
+  </view>
+
+  <!-- 标签栏 -->
+  <view class="tag-list">
+    <view class="tag active">置顶</view>
+    <view class="tag">更新</view>
+    <view class="tag">预计上新</view>
+  </view>
+
+  <!-- Check-in 签到 -->
+  <view class="checkin-section">
+    <view class="checkin-header">
+      <view class="checkin-title">
+        <text class="title-en">Check-in</text>
+        <text class="subtitle">已连续签到{{checkinDays}}天 🔥</text>
+      </view>
+      <view class="checkin-btn" bindtap="onCheckin">
+        <text class="checkin-text">签到</text>
+        <text class="checkin-arrow">↻</text>
+      </view>
+    </view>
+    <view class="checkin-grid">
+      <view class="reward-item active">
+        <text class="reward-num">+55</text>
+      </view>
+      <view class="reward-item">
+        <text class="reward-num">+66</text>
+      </view>
+      <view class="reward-item">
+        <text class="reward-num">+77</text>
+      </view>
+      <view class="reward-item">
+        <text class="reward-num">+99</text>
+      </view>
+      <view class="reward-item">
+        <text class="reward-num">+111</text>
+      </view>
+      <view class="reward-item">
+        <text class="reward-num">+131</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Redeem 兑换码 -->
+  <view class="redeem-section">
+    <text class="redeem-title">Redeem</text>
+    <text class="redeem-subtitle">兑换码要及时兑换，避免过期哦</text>
+    <view class="redeem-input-wrap">
+      <input 
+        class="redeem-input" 
+        placeholder="请输入兑换码"
+        value="{{redeemCode}}"
+        bindinput="onRedeemInput"
+        placeholder-class="placeholder"
+      />
+      <view class="redeem-btn" bindtap="onRedeem">
+        <text class="redeem-arrow">→</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 自定义 tabBar -->
+  <custom-tab-bar />
+</view>

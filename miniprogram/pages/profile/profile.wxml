@@ -1,0 +1,192 @@
+<view class="container">
+  <!-- Header -->
+  <view class="header">
+    <text class="header-title">Profile</text>
+    <view class="header-actions">
+      <view class="header-btn" bindtap="openNotification">
+        <text class="btn-icon">🔔</text>
+        <view class="badge"></view>
+      </view>
+      <view class="header-btn">
+        <text class="btn-icon">⚙️</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Profile Card -->
+  <view class="profile-card">
+    <view class="profile-main">
+      <view class="avatar-wrap">
+        <view class="avatar">
+          <text class="avatar-placeholder">V</text>
+        </view>
+        <view class="camera-btn" bindtap="editAvatar">
+          <text class="camera-icon">📷</text>
+        </view>
+      </view>
+
+      <view class="profile-info">
+        <view class="name-row">
+          <text class="nickname">Vexill</text>
+          <view class="edit-btn" bindtap="editProfile">
+            <text class="edit-icon">✏️</text>
+          </view>
+        </view>
+        <view class="id-row">
+          <text class="user-id">ID: Vexill</text>
+          <text class="level-tag">LV.6</text>
+        </view>
+      </view>
+
+      <view class="share-btn" bindtap="shareProfile">
+        <text class="share-icon">↗️</text>
+      </view>
+    </view>
+
+    <text class="bio">我想一路奔赴，不过是想明了你心之归处；以灵魂为旗，终生皆为航向，藏于骨血的向往，终抵无声归途</text>
+
+    <view class="stats-row">
+      <view class="stat-item" bindtap="showFollowing">
+        <text class="stat-num">{{followingCount}}</text>
+        <text class="stat-label">Following</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item" bindtap="showFollowers">
+        <text class="stat-num">{{followersCount}}</text>
+        <text class="stat-label">Followers</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item" bindtap="showLikes">
+        <text class="stat-num">{{likesCount}}</text>
+        <text class="stat-label">Likes</text>
+      </view>
+    </view>
+
+    <view class="location">
+      <text class="location-icon">📍</text>
+      <text class="location-text">中国</text>
+    </view>
+  </view>
+
+  <!-- Cards Row -->
+  <view class="cards-row">
+    <view class="vip-card" bindtap="goToVip">
+      <view class="vip-header">
+        <text class="card-label">会员中心</text>
+        <text class="card-arrow">›</text>
+      </view>
+      <text class="vip-title">SVIP</text>
+      <text class="vip-sub">积分 2,580</text>
+    </view>
+
+    <view class="fortune-card" bindtap="openFortune">
+      <view class="fortune-header">
+        <view class="fortune-icon">⭐</view>
+        <view class="toggle-switch {{fortuneOn ? 'on' : ''}}" bindtap="toggleFortune">
+          <view class="switch-dot"></view>
+        </view>
+      </view>
+      <text class="fortune-title">今日运势</text>
+      <text class="fortune-sub">测试</text>
+    </view>
+  </view>
+
+  <!-- Menu List -->
+  <view class="menu-list">
+    <view class="menu-item" bindtap="goToWallet">
+      <view class="menu-icon-wrap">
+        <text class="menu-icon">💳</text>
+      </view>
+      <text class="menu-text">钱包</text>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-item" bindtap="goToCharacter">
+      <view class="menu-icon-wrap">
+        <text class="menu-icon">👤</text>
+      </view>
+      <text class="menu-text">人设设定</text>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-item" bindtap="goToFeedback">
+      <view class="menu-icon-wrap">
+        <text class="menu-icon">⭐</text>
+      </view>
+      <text class="menu-text">许愿与反馈</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- Post Tabs -->
+  <view class="tab-bar">
+    <view class="tab-pill {{currentTab === 'featured' ? 'active' : ''}}" bindtap="switchTab" data-tab="featured">精选</view>
+    <view class="tab-pill {{currentTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">全部帖子</view>
+    <view class="tab-pill {{currentTab === 'replies' ? 'active' : ''}}" bindtap="switchTab" data-tab="replies">回复</view>
+    <view class="tab-pill {{currentTab === 'likes' ? 'active' : ''}}" bindtap="switchTab" data-tab="likes">点赞</view>
+  </view>
+
+  <!-- Post Content -->
+  <view class="post-content">
+    <!-- Featured Posts -->
+    <view class="post-list" wx:if="{{currentTab === 'featured'}}">
+      <view class="post-card" bindtap="showPostDetail">
+        <view class="post-header">
+          <view class="post-avatar">
+            <text>V</text>
+          </view>
+          <view class="post-meta">
+            <text class="post-name">Vexill</text>
+            <text class="post-time">2小时前</text>
+          </view>
+        </view>
+        <text class="post-text">今日份的思考：以灵魂为旗，终生皆为航向。愿我们都能在无声归途中找到心之归处。</text>
+        <view class="post-actions">
+          <view class="action-btn" catchtap="likePost">
+            <text class="action-icon">♡</text>
+            <text class="action-count">1.2k</text>
+          </view>
+          <view class="action-btn" catchtap="commentPost">
+            <text class="action-icon">💬</text>
+            <text class="action-count">86</text>
+          </view>
+          <view class="action-btn" catchtap="sharePost">
+            <text class="action-icon">↗️</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="post-card" bindtap="showPostDetail">
+        <view class="post-header">
+          <view class="post-avatar">
+            <text>V</text>
+          </view>
+          <view class="post-meta">
+            <text class="post-name">Vexill</text>
+            <text class="post-time">昨天</text>
+          </view>
+        </view>
+        <text class="post-text">分享一张今日拍摄的照片，光影交错间，仿佛看见了时间的痕迹。</text>
+        <view class="post-images">
+          <view class="post-image"></view>
+          <view class="post-image"></view>
+        </view>
+        <view class="post-actions">
+          <view class="action-btn" catchtap="likePost">
+            <text class="action-icon">♡</text>
+            <text class="action-count">3.5k</text>
+          </view>
+          <view class="action-btn" catchtap="commentPost">
+            <text class="action-icon">💬</text>
+            <text class="action-count">234</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- Other Tabs -->
+    <view class="empty-state" wx:if="{{currentTab !== 'featured'}}">
+      <text class="empty-text">这里显示{{tabNames[currentTab]}}</text>
+    </view>
+  </view>
+</view>
